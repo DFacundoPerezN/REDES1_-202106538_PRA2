@@ -7,90 +7,90 @@
 ### Configuración de routers
 ### Router 1
 
-´´´
-enable
-configure terminal
-interface s1/0
-ip address 10.0.0.1 255.255.255.252 
-no shutdown
-exit
 
-interface fa0/0
-ip address 182.168.1.2 255.255.255.248
-no shutdown
-exit
-
-interface fa0/1
-ip address 182.168.2.2 255.255.255.248
-no shutdown
-exit
+    enable
+    configure terminal
+    interface s1/0
+    ip address 10.0.0.1 255.255.255.252 
+    no shutdown
+    exit
+    
+    interface fa0/0
+    ip address 182.168.1.2 255.255.255.248
+    no shutdown
+    exit
+    
+    interface fa0/1
+    ip address 182.168.2.2 255.255.255.248
+    no shutdown
+    exit
 
 ---
 
 ### Router 2 
-enable
-configure terminal
-interface fa0/0
-ip address 182.168.1.1 255.255.255.248
-no shutdown
-exit
-
-interface fa0/1
-ip address 182.168.0.2 255.255.255.0
-standby 1 ip 182.168.0.1
-standby 1 priority 120
-standby 1 preempt
-no shutdown
+    enable
+    configure terminal
+    interface fa0/0
+    ip address 182.168.1.1 255.255.255.248
+    no shutdown
+    exit
+    
+    interface fa0/1
+    ip address 182.168.0.2 255.255.255.0
+    standby 1 ip 182.168.0.1
+    standby 1 priority 120
+    standby 1 preempt
+    no shutdown
 #### configurado como router activo
 ------
 ### Router 6
-enable
-configure terminal
-interface fa0/0
-ip address 182.178.1.2 255.255.255.248
-no shutdown
-exit
-
-interface fa0/1
-ip address 182.178.0.2 255.255.255.0
-standby 2 ip 182.178.0.1
-standby 2 priority 120
-standby 2 preempt
-no shutdown
-exit
+    enable
+    configure terminal
+    interface fa0/0
+    ip address 182.178.1.2 255.255.255.248
+    no shutdown
+    exit
+    
+    interface fa0/1
+    ip address 182.178.0.2 255.255.255.0
+    standby 2 ip 182.178.0.1
+    standby 2 priority 120
+    standby 2 preempt
+    no shutdown
+    exit
 #### configurado como router activo
 ---
 
 ### Configuración de switches
 ### SW1
-enable
-configure terminal
-interface range fa0/3-4
+    enable
+    configure terminal
+    interface range fa0/3-4
 #### conectar grupo del switch con el switch 0
-channel-group 1 mode auto
-exit
-
-interface port-channel 1
-switchport mode trunk
+    channel-group 1 mode auto
+    exit
+    
+    interface port-channel 1
+    switchport mode trunk
 
 #### para ver pagp configurado en el switch
-show etherchannel
+    show etherchannel
 
 ----
 ### SW3 (misma configuración para SW2)
-enable
-configure terminal
-interface range fa0/3-4
-channel-group 2 mode active
-exit
+    enable
+    configure terminal
+    interface range fa0/3-4
+    channel-group 2 mode active
+    exit
+    
+    interface port-channel 2
+    switchport mode trunk
+    exit
 
-interface port-channel 2
-switchport mode trunk
-exit
-
-exit
+    exit
 #### para ver pagp configurado en el switch
-show etherchannel
+    show etherchannel
 
 ----
 ### Configuración de VPCs
